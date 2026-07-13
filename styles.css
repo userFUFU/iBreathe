@@ -1,0 +1,142 @@
+:root {
+  color-scheme: light;
+  background: #f8fbff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background:
+    linear-gradient(180deg, #fbfdff 0%, #eef7ff 45%, #edf5fc 100%);
+}
+
+.experience {
+  position: fixed;
+  inset: 0;
+  min-width: 320px;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.data-viz__canvas,
+.static-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.data-viz__canvas {
+  display: block;
+  cursor: default;
+  touch-action: none;
+}
+
+.scene-picker {
+  position: fixed;
+  z-index: 3;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: min(92vw, 520px);
+  margin: 0;
+  padding: 5px;
+  border: 1px solid rgba(111, 144, 184, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 10px 28px rgba(48, 79, 120, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.scene-picker label {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.scene-picker input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scene-picker span {
+  display: block;
+  min-width: 44px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: rgba(51, 80, 123, 0.68);
+  font: 500 13px/1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: center;
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.scene-picker input:checked + span {
+  color: rgba(37, 72, 128, 0.95);
+  background: rgba(235, 244, 255, 0.92);
+  box-shadow: inset 0 0 0 1px rgba(92, 134, 203, 0.16);
+}
+
+.scene-picker label:hover span {
+  color: rgba(37, 72, 128, 0.95);
+}
+
+.scene-picker input:focus-visible + span {
+  outline: 2px solid rgba(79, 129, 220, 0.45);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .scene-picker {
+    top: 12px;
+    left: 12px;
+  }
+
+  .scene-picker span {
+    min-width: 38px;
+    padding: 7px 8px;
+    font-size: 12px;
+  }
+}
+
+.static-fallback {
+  opacity: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 91%, rgba(245, 190, 90, 0.56) 0%, rgba(245, 190, 90, 0.24) 20%, rgba(245, 190, 90, 0) 48%),
+    conic-gradient(from 200deg at 50% 91%, transparent 0deg, rgba(65, 111, 208, 0.24) 5deg, transparent 7deg, rgba(65, 111, 208, 0.2) 10deg, transparent 12deg, rgba(65, 111, 208, 0.16) 15deg, transparent 17deg, rgba(65, 111, 208, 0.22) 20deg, transparent 22deg, rgba(65, 111, 208, 0.18) 25deg, transparent 27deg, transparent 140deg),
+    linear-gradient(180deg, #fbfdff 0%, #eef7ff 48%, #e9f4fe 100%);
+  filter: saturate(0.9);
+}
+
+.static-fallback::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  width: min(78vw, 980px);
+  height: min(42vh, 460px);
+  transform: translateX(-50%);
+  border-radius: 50% 50% 0 0;
+  background:
+    repeating-conic-gradient(from 198deg at 50% 100%, rgba(61, 105, 206, 0.3) 0deg 0.18deg, transparent 0.18deg 1.45deg);
+  mask-image: radial-gradient(ellipse at 50% 100%, #000 0%, #000 58%, transparent 74%);
+}
+
+.static-fallback.is-visible,
+.no-canvas .static-fallback {
+  opacity: 1;
+}
